@@ -1,7 +1,7 @@
 import React from 'react';
 import './Root.module.scss';
 
-function Root() {
+const Root = () => {
   return (
     <h1>Working!</h1>
   );
