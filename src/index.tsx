@@ -4,8 +4,8 @@ import './index.scss';
 import Root from './views/Root/Root';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Root />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Root />
+    </React.StrictMode>,
+    document.getElementById('root'),
 );
