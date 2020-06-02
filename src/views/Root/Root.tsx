@@ -1,8 +1,15 @@
 import React from 'react';
 import './Root.module.scss';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import HomeView from '../HomeView/HomeView';
 
 const Root = () => {
-    return <h1>Working!</h1>;
+    return (
+        <Router>
+            <Switch>
+                <Route exact path="/" component={HomeView} />
+            </Switch>
+        </Router>
+    );
 };
-
 export default Root;
