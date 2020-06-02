@@ -1,20 +1,21 @@
+@import "index.scss";
 .button {
     width: 50%;
     font-size: 15px;
     text-decoration: none;
     padding: 7px;
     font-weight: 500;
-    background-color: #1ab4d6;
+    background-color: $light-blue;
     border: none;
     color: rgb(255, 255, 255);
     cursor: pointer;
     margin-left: 10px;
     text-align: center;
-    box-shadow: 0px 0px 0px red;
+    box-shadow: 0px 0px 0px blue;
     transition: .5s ease-in-out all;
     border-radius: 20px;
   }
   .button:hover{
-    box-shadow: 7px 0px 0px #eeb144;
-    background-color:#1a4fd6;
+    box-shadow: 7px 0px 0px $light-blue;
+    background-color:$dark-blue;
   }
