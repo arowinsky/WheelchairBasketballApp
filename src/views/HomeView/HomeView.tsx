@@ -1,6 +1,11 @@
 import React from 'react';
 import styles from './HomeView.module.scss';
+import Button from 'components/Button/Button';
 
-const HomeView = () => <div className={styles.wrapper}>Main Site</div>;
+const HomeView: React.FunctionComponent = () => (
+    <div className={styles.wrapper}>
+        <Button>Zarejestruj się</Button>
+    </div>
+);
 
 export default HomeView;
