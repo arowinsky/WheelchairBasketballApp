@@ -5,6 +5,7 @@ import Button from 'components/Button/Button';
 const HomeView: React.FunctionComponent = () => (
     <div className={styles.wrapper}>
         <Button>Zarejestruj się</Button>
+        <Button>Zaloguj się</Button>
     </div>
 );
 
