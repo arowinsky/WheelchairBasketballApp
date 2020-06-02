@@ -12,3 +12,7 @@ Run dev server (on port 3000):
 ```bash
 npm start
 ```
+Run Storybook (on port 9009):
+```bash
+npm run storybook
+```
