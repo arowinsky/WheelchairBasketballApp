@@ -4,7 +4,7 @@ import styles from './RegisterForm.module.scss';
 import Button from 'components/Button/Button';
 const RegisterForm = () => (
     <div className={styles.wrapper}>
-        <h1>Rejestracja:</h1>
+        <div className={styles.formHeader}>Rejestracja:</div>
         <Formik
             initialValues={{
                 firstName: '',
