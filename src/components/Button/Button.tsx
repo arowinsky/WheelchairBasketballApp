@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Button.module.scss';
 
 interface Props {
-    children: string;
+    children: any;
 }
 
 const Button = ({ children }: Props) => {
