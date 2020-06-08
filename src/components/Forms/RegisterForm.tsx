@@ -1,23 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import styles from './RegisterForm.module.scss';
 import Button from 'components/Button/Button';
 const RegisterForm = () => {
-    const [clubs, setClubs] = useState(null);
-
-    useEffect(() => {
-        if (clubs === null) {
-            const fetchData = async () => {
-                const response = await fetch(`https://localhost:8000/api/getclub`);
-                const resJson = await response.json();
-                console.log(resJson);
-                setClubs(resJson);
-            };
-            fetchData();
-            console.log(setClubs);
-        }
-    }, [clubs]);
-    console.log(clubs);
     return (
         <div className={styles.wrapper}>
             <div className={styles.formHeader}>Rejestracja:</div>
