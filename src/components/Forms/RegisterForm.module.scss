@@ -32,9 +32,13 @@
 
   .formItem {
     width: 100%;
-    margin: 24px 0;
+    margin: 20px 0;
     position: relative;
     flex-shrink: 0;
+  }
+  .formItemBar {
+    width: 100%;
+    margin: 4px 0 0 4px;
   }
   .input {
     color: black;

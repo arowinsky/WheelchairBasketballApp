@@ -3,7 +3,7 @@ import RegisterForm from 'components/Forms/RegisterForm';
 
 const RegisterView: React.FunctionComponent = () => (
     <div>
-        <RegisterForm />
+        <RegisterForm onSubmit={() => {}} />
     </div>
 );
 
