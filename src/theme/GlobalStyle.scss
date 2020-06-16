@@ -1,6 +1,11 @@
 /*COLORS*/
 $light-blue:#1e90ff;;
 $dark-blue: #0047b2;
+$dark-grey-element: #787878;
+
+/*FONTS*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+$header-font:'Montserrat', sans-serif;
 
 body {
   margin: 0;
