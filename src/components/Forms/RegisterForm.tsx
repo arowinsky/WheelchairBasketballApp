@@ -17,7 +17,7 @@ interface Props {
     onSubmit: (values: ValuesForm) => void;
 }
 
-const RegisterForm: React.FunctionComponent<Props> = ({ onSubmit }) => {
+const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
     const formSchema = Yup.object().shape({
         firstName: Yup.string().min(3, 'Imię musi mieć minimum 3 znaki').required('Uzupełnij Imię'),
         lastName: Yup.string().min(3, 'Nazwisko musi mieć minimum 3 znaki').required('Uzupełnij Nazwisko'),
@@ -27,9 +27,7 @@ const RegisterForm: React.FunctionComponent<Props> = ({ onSubmit }) => {
             .oneOf([Yup.ref('password1'), undefined], 'Hasła nie są jednakowe')
             .required('Powtórz hasło'),
         club: Yup.string().required('Wybierz klub'),
-        termsOfService: Yup.boolean()
-            .required('Zakceptuj warunki korzystania z serwisu.')
-            .oneOf([true], 'Zakcpetuj warunki korzystania z serwisu.'),
+        termsOfService: Yup.boolean().oneOf([true], 'Zakceptuj warunki korzystania z serwisu'),
     });
 
     return (
