@@ -3,7 +3,7 @@ import styles from './HomeView.module.scss';
 import Button from 'components/Button/Button';
 import { Link } from 'react-router-dom';
 
-const HomeView: React.FunctionComponent = () => (
+const HomeView: React.FC = () => (
     <div className={styles.wrapper}>
         <Button>
             <Link className={styles.link} to="/register">
