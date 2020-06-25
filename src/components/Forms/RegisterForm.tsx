@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import { Formik, Form, Field } from 'formik';
 import styles from './RegisterForm.module.scss';
 import Button from 'components/Button/Button';
+import axios from 'axios';
 
 interface ValuesForm {
     firstName: string;
@@ -42,10 +43,27 @@ const RegisterForm: React.FC = () => {
         console.log(valuesForm);
     };
 
+    const register = async (valuesForm: ValuesForm) => {
+        console.log(valuesForm);
+        const response = await axios
+            .post(`https:localhost:8000/api/users`, {
+                firstname: valuesForm.firstName,
+                lastname: valuesForm.lastName,
+                email: valuesForm.email,
+                password: valuesForm.password1,
+                club: valuesForm.club,
+            })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
     return (
         <div className={styles.wrapper}>
             <div className={styles.formHeader}>Rejestracja:</div>
-            <Formik initialValues={initialValues} validationSchema={formSchema} onSubmit={handleSubmit}>
+            <Formik initialValues={initialValues} validationSchema={formSchema} onSubmit={register}>
                 {({ errors, values, touched }) => (
                     <Form className={styles.form}>
                         <div className={styles.formItem}>
