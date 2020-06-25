@@ -1,8 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import * as Yup from 'yup';
 import { Formik, Form, Field } from 'formik';
 import styles from './RegisterForm.module.scss';
 import Button from 'components/Button/Button';
+
 interface ValuesForm {
     firstName: string;
     lastName: string;
@@ -13,11 +14,17 @@ interface ValuesForm {
     termsOfService: boolean;
 }
 
-interface Props {
-    onSubmit: (values: ValuesForm) => void;
-}
+const initialValues: ValuesForm = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password1: '',
+    password2: '',
+    club: '',
+    termsOfService: false,
+};
 
-const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
+const RegisterForm: React.FC = () => {
     const formSchema = Yup.object().shape({
         firstName: Yup.string().min(3, 'Imię musi mieć minimum 3 znaki').required('Uzupełnij Imię'),
         lastName: Yup.string().min(3, 'Nazwisko musi mieć minimum 3 znaki').required('Uzupełnij Nazwisko'),
@@ -29,26 +36,16 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
         club: Yup.string().required('Wybierz klub'),
         termsOfService: Yup.boolean().oneOf([true], 'Zakceptuj warunki korzystania z serwisu'),
     });
+    let valuesForm: ValuesForm;
+    const handleSubmit = (values: ValuesForm): void => {
+        valuesForm = values;
+        console.log(valuesForm);
+    };
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.formHeader}>Rejestracja:</div>
-            <Formik
-                initialValues={{
-                    firstName: '',
-                    lastName: '',
-                    email: '',
-                    password1: '',
-                    password2: '',
-                    club: '',
-                    termsOfService: false,
-                }}
-                validationSchema={formSchema}
-                onSubmit={(values) => {
-                    console.log(values);
-                    onSubmit(values);
-                }}
-            >
+            <Formik initialValues={initialValues} validationSchema={formSchema} onSubmit={handleSubmit}>
                 {({ errors, values, touched }) => (
                     <Form className={styles.form}>
                         <div className={styles.formItem}>
