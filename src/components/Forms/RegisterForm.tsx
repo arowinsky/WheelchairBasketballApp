@@ -38,12 +38,8 @@ const RegisterForm: React.FC = () => {
         termsOfService: Yup.boolean().oneOf([true], 'Zakceptuj warunki korzystania z serwisu'),
     });
     let valuesForm: ValuesForm;
-    const handleSubmit = (values: ValuesForm): void => {
-        valuesForm = values;
-        console.log(valuesForm);
-    };
-
-    const register = async (valuesForm: ValuesForm) => {
+    let isRegistered: number;
+    const handleSubmit = async (valuesForm: ValuesForm) => {
         console.log(valuesForm);
         const response = await axios
             .post(`https:localhost:8000/api/users`, {
@@ -55,15 +51,18 @@ const RegisterForm: React.FC = () => {
             })
             .then((response) => {
                 console.log(response);
+                isRegistered = response.status;
+                console.log(isRegistered);
             })
             .catch((err) => {
                 console.log(err);
             });
     };
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.formHeader}>Rejestracja:</div>
-            <Formik initialValues={initialValues} validationSchema={formSchema} onSubmit={register}>
+            <Formik initialValues={initialValues} validationSchema={formSchema} onSubmit={handleSubmit}>
                 {({ errors, values, touched }) => (
                     <Form className={styles.form}>
                         <div className={styles.formItem}>
