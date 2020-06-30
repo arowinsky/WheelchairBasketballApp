@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { Formik, Form, Field } from 'formik';
 import styles from './RegisterForm.module.scss';
 import Button from 'components/Button/Button';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 interface ValuesForm {
     firstName: string;
@@ -37,11 +38,10 @@ const RegisterForm: React.FC = () => {
         club: Yup.string().required('Wybierz klub'),
         termsOfService: Yup.boolean().oneOf([true], 'Zakceptuj warunki korzystania z serwisu'),
     });
-    let valuesForm: ValuesForm;
-    let isRegistered: number;
+
+    const [data, setData] = useState(0);
     const handleSubmit = async (valuesForm: ValuesForm) => {
-        console.log(valuesForm);
-        const response = await axios
+        await axios
             .post(`https:localhost:8000/api/users`, {
                 firstname: valuesForm.firstName,
                 lastname: valuesForm.lastName,
@@ -50,20 +50,20 @@ const RegisterForm: React.FC = () => {
                 club: valuesForm.club,
             })
             .then((response) => {
-                console.log(response);
-                isRegistered = response.status;
-                console.log(isRegistered);
+                setData(response.status);
             })
             .catch((err) => {
                 console.log(err);
             });
     };
-
+    if (data !== 0) {
+        return <Redirect to="/register-success" />;
+    }
     return (
         <div className={styles.wrapper}>
             <div className={styles.formHeader}>Rejestracja:</div>
             <Formik initialValues={initialValues} validationSchema={formSchema} onSubmit={handleSubmit}>
-                {({ errors, values, touched }) => (
+                {({ errors, touched }) => (
                     <Form className={styles.form}>
                         <div className={styles.formItem}>
                             <label htmlFor="firstName">Imię</label>
