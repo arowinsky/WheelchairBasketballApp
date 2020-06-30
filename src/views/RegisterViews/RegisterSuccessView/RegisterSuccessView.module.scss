@@ -1,0 +1,23 @@
+.wrapper{
+    width: 100%;
+    display: grid;
+    align-items: inline;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+}
+.header {
+    max-width: 345px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    line-height: 20px;
+}
+.buttons {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    justify-items: center;
+}
+.link {
+    text-decoration: none;
+    color: #ffffff;
+}

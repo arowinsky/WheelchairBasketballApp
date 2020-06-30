@@ -1,8 +1,11 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { Formik, Form, Field } from 'formik';
 import styles from './RegisterForm.module.scss';
 import Button from 'components/Button/Button';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+
 interface ValuesForm {
     firstName: string;
     lastName: string;
@@ -13,11 +16,17 @@ interface ValuesForm {
     termsOfService: boolean;
 }
 
-interface Props {
-    onSubmit: (values: ValuesForm) => void;
-}
+const initialValues: ValuesForm = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password1: '',
+    password2: '',
+    club: '',
+    termsOfService: false,
+};
 
-const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
+const RegisterForm: React.FC = () => {
     const formSchema = Yup.object().shape({
         firstName: Yup.string().min(3, 'Imię musi mieć minimum 3 znaki').required('Uzupełnij Imię'),
         lastName: Yup.string().min(3, 'Nazwisko musi mieć minimum 3 znaki').required('Uzupełnij Nazwisko'),
@@ -30,26 +39,31 @@ const RegisterForm: React.FC<Props> = ({ onSubmit }) => {
         termsOfService: Yup.boolean().oneOf([true], 'Zakceptuj warunki korzystania z serwisu'),
     });
 
+    const [data, setData] = useState(0);
+    const handleSubmit = async (valuesForm: ValuesForm) => {
+        await axios
+            .post(`https:localhost:8000/api/users`, {
+                firstname: valuesForm.firstName,
+                lastname: valuesForm.lastName,
+                email: valuesForm.email,
+                password: valuesForm.password1,
+                club: valuesForm.club,
+            })
+            .then((response) => {
+                setData(response.status);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+    if (data !== 0) {
+        return <Redirect to="/register-success" />;
+    }
     return (
         <div className={styles.wrapper}>
             <div className={styles.formHeader}>Rejestracja:</div>
-            <Formik
-                initialValues={{
-                    firstName: '',
-                    lastName: '',
-                    email: '',
-                    password1: '',
-                    password2: '',
-                    club: '',
-                    termsOfService: false,
-                }}
-                validationSchema={formSchema}
-                onSubmit={(values) => {
-                    console.log(values);
-                    onSubmit(values);
-                }}
-            >
-                {({ errors, values, touched }) => (
+            <Formik initialValues={initialValues} validationSchema={formSchema} onSubmit={handleSubmit}>
+                {({ errors, touched }) => (
                     <Form className={styles.form}>
                         <div className={styles.formItem}>
                             <label htmlFor="firstName">Imię</label>
