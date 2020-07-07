@@ -15,7 +15,6 @@ const initialValues: ValuesForm = {
 };
 
 const LoginForm: React.FC = () => {
-    const [data, setData] = useState({});
     const handleSubmit = async (valuesForm: ValuesForm) => {
         await axios
             .post(
@@ -46,8 +45,6 @@ const LoginForm: React.FC = () => {
                         .then((res) => {
                             console.log(res);
                         });
-                    setData(response);
-                    console.log('In state:' + response.data);
                 }
             })
             .catch((err) => {
