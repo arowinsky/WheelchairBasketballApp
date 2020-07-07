@@ -20,6 +20,7 @@ module.exports = {
     ],
     rules: {
         "react/prop-types":"off",
-        "@typescript-eslint/no-empty-function": "off"
+        "@typescript-eslint/no-empty-function": "off",
+        "prettier/prettier": "off"
     },
 };

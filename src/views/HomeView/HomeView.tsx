@@ -10,7 +10,11 @@ const HomeView: React.FC = () => (
                 Zarejestruj się
             </Link>
         </Button>
-        <Button>Zaloguj się</Button>
+        <Button>
+          <Link className={styles.link} to="/login">
+              Zaloguj się
+            </Link>
+        </Button>
     </div>
 );
 
