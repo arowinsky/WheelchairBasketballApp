@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import styles from './LoginForm.module.scss';
 import Button from 'components/Button/Button';
