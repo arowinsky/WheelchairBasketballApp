@@ -16,12 +16,13 @@ const initialValues: ValuesForm = {
 
 const LoginForm: React.FC = () => {
     const handleSubmit = async (valuesForm: ValuesForm) => {
+        const{email, password} = valuesForm
         await axios
             .post(
-                'https://localhost:8000/authentication_token',
+                'https://appwba.herokuapp.com/authentication_token',
                 {
-                    email: valuesForm.email,
-                    password: valuesForm.password,
+                    email: email,
+                    password: password,
                 },
                 {
                     headers: {
@@ -30,12 +31,10 @@ const LoginForm: React.FC = () => {
                 },
             )
             .then((response) => {
-                console.log(response);
                 const {token} = response.data
                 if (response) {
-                    console.log("no siema" + token)
                     axios
-                        .get(`https://localhost:8000/api/clubs`, {
+                        .get(`https://appwba.herokuapp.com/api/users?email=&{email}`, {
                             headers: {
                                 'Content-Type': 'application/json',
                                 'Authorization': 'Bearer ' + token,
@@ -43,7 +42,7 @@ const LoginForm: React.FC = () => {
                             },
                         })
                         .then((res) => {
-                            console.log(res);
+                            console.log(res)
                         });
                 }
             })
